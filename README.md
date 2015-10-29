@@ -1,3 +1,3 @@
-# Album applicaton written in Zend Expressive
+# Album application written in Zend Expressive
 
 WIP
