@@ -13,11 +13,13 @@ class HomePageAction
 {
     private $router;
     private $template;
+
     public function __construct(Router\RouterInterface $router, Template\TemplateRendererInterface $template = null)
     {
-        $this->router   = $router;
+        $this->router = $router;
         $this->template = $template;
     }
+
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next = null)
     {
         $data = [];

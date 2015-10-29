@@ -4,6 +4,7 @@ namespace App\Album\Repository;
 
 use App\Album\Entity\Album;
 use Doctrine\DBAL\Connection;
+use Zend\Hydrator\ArraySerializable;
 
 class AlbumRepository implements AlbumRepositoryInterface
 {
@@ -45,5 +46,28 @@ class AlbumRepository implements AlbumRepositoryInterface
         }
 
         return $albums;
+    }
+
+    /**
+     * @param int $id
+     * @return Album
+     */
+    public function fetchOne($id)
+    {
+        $qb = $this->db->createQueryBuilder();
+
+        $qb
+            ->select('*')
+            ->from('album', 'a')
+            ->where('id = :id')
+            ->setParameter('id', $id);
+
+        $result = $qb->execute()->fetch();
+
+        if (!$result) {
+            throw new \Exception("Could not find row $id");
+        }
+
+        return (new ArraySerializable())->hydrate($result, new Album());
     }
 }

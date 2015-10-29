@@ -2,6 +2,7 @@
 
 namespace App\Album\Service;
 
+use App\Album\Entity\Album;
 use App\Album\Repository\AlbumRepositoryInterface;
 
 class AlbumService implements AlbumServiceInterface
@@ -25,5 +26,14 @@ class AlbumService implements AlbumServiceInterface
     public function listAlbums()
     {
         return $this->repository->fetchAll();
+    }
+
+    /**
+     * @param int $id
+     * @return Album
+     */
+    public function getAlbum($id)
+    {
+        return $this->repository->fetchOne($id);
     }
 }

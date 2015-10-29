@@ -2,6 +2,8 @@
 
 namespace App\Album\Service;
 
+use App\Album\Entity\Album;
+
 interface AlbumServiceInterface
 {
     /**
@@ -10,4 +12,12 @@ interface AlbumServiceInterface
      * @return array
      */
     public function listAlbums();
+
+    /**
+     * Get a single album
+     *
+     * @param int $id
+     * @return Album
+     */
+    public function getAlbum($id);
 }
