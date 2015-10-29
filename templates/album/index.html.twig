@@ -1,0 +1,29 @@
+{% extends '@layout/default.html.twig' %}
+
+{% block title %}My Albums{% endblock %}
+
+{% block content %}
+    <h1>My Albums</h1>
+
+    <p>
+        <a href="{{ path('album.add') }}">Add new album</a>
+    </p>
+
+    <table class="table">
+        <tr>
+            <th>Title</th>
+            <th>Artist</th>
+            <th>&nbsp;</th>
+        </tr>
+        {% for album in albums %}
+            <tr>
+                <td>{{ album.title }}</td>
+                <td>{{ album.artist }}</td>
+                <td>
+                    <a href="{{ path('album.edit', {id: album.id}) }}">Edit</a>
+                    <a href="{{ path('album.delete', {id: album.id}) }}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
