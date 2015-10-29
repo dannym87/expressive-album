@@ -38,7 +38,7 @@ class AlbumRepository implements AlbumRepositoryInterface
         }
 
         $hydrator = new \Zend\Stdlib\Hydrator\ArraySerializable();
-        $albums = array();
+        $albums = [];
 
         foreach ($result as $album) {
             array_push($albums, $hydrator->hydrate($album, new Album()));
