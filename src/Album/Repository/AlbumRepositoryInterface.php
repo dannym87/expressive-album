@@ -16,4 +16,10 @@ interface AlbumRepositoryInterface
      * @return Album
      */
     public function fetchOne($id);
+
+    /**
+     * @param Album $album
+     * @return bool
+     */
+    public function save(Album $album);
 }

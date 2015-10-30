@@ -17,25 +17,18 @@ class IndexAction
     protected $albumService;
 
     /**
-     * @var Router\RouterInterface
-     */
-    private $router;
-
-    /**
      * @var Template\TemplateRendererInterface
      */
     private $template;
 
     /**
-     * @param Router\RouterInterface $router
      * @param Template\TemplateRendererInterface|null $template
+     * @param AlbumServiceInterface $albumService
      */
     public function __construct(
-        Router\RouterInterface $router,
         Template\TemplateRendererInterface $template = null,
         AlbumServiceInterface $albumService
     ) {
-        $this->router = $router;
         $this->template = $template;
         $this->albumService = $albumService;
     }

@@ -1,0 +1,47 @@
+{% extends '@layout/default.html.twig' %}
+
+{% block title %}Add Album{% endblock %}
+
+{% block content %}
+    <h1>Add Album</h1>
+
+    {% if form.messages %}
+        <div class="alert alert-danger">
+            <strong>The following errors occurred</strong>
+            <ul>
+                {% for messages in form.messages %}
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <form name="{{ form.name }}" method="post">
+        <input type="{{ form.get('id').attributes.type }}" name="{{ form.get('id').name }}"/>
+
+        <div class="form-group">
+            <label for="{{ form.get('title').name }}">{{ form.get('title').label }}</label>
+            <input class="form-control"
+                   type="{{ form.get('title').attributes.type }}"
+                   name="{{ form.get('title').name }}"
+                   value="{{ form.get('title').value }}" />
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.get('artist').name }}">{{ form.get('artist').label }}</label>
+            <input class="form-control"
+                   type="{{ form.get('artist').attributes.type }}"
+                   name="{{ form.get('artist').name }}"
+                   value="{{ form.get('artist').value }}" />
+        </div>
+
+        <div class="form-group">
+            <input class="btn btn-primary"
+                   type="{{ form.get('submit').attributes.type }}"
+                   name="{{ form.get('submit').name }}"
+                   value="{{ form.get('submit').value }}" />
+        </div>
+    </form>
+{% endblock %}

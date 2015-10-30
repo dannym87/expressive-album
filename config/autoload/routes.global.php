@@ -30,7 +30,7 @@ return [
             'name'            => 'album.add',
             'path'            => '/album/add',
             'middleware'      => App\Album\Action\AddAction::class,
-            'allowed_methods' => ['GET'],
+            'allowed_methods' => ['GET', 'POST'],
         ],
         [
             'name'            => 'album.edit',

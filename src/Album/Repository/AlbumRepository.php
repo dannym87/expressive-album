@@ -38,7 +38,7 @@ class AlbumRepository implements AlbumRepositoryInterface
             return [];
         }
 
-        $hydrator = new \Zend\Stdlib\Hydrator\ArraySerializable();
+        $hydrator = new ArraySerializable();
         $albums = [];
 
         foreach ($result as $album) {
@@ -69,5 +69,20 @@ class AlbumRepository implements AlbumRepositoryInterface
         }
 
         return (new ArraySerializable())->hydrate($result, new Album());
+    }
+
+    /**
+     * @param Album $album
+     * @return int The number of affected rows
+     */
+    public function save(Album $album)
+    {
+        $data = $album->getArrayCopy();
+
+        if (null === $album->getId()) {
+            return $this->db->insert('album', $data);
+        } else {
+            // @todo update
+        }
     }
 }

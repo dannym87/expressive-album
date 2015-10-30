@@ -20,4 +20,12 @@ interface AlbumServiceInterface
      * @return Album
      */
     public function getAlbum($id);
+
+    /**
+     * Add a new album
+     *
+     * @param array $data
+     * @return bool
+     */
+    public function addAlbum(array $data);
 }
