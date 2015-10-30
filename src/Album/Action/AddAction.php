@@ -24,11 +24,17 @@ class AddAction
     protected $router;
 
     /**
+     * @var AlbumForm
+     */
+    protected $form;
+
+    /**
      * @var Template\TemplateRendererInterface
      */
     private $template;
 
     /**
+     * @param Router\RouterInterface $router
      * @param Template\TemplateRendererInterface|null $template
      * @param AlbumServiceInterface $albumService
      * @param AlbumForm $form
