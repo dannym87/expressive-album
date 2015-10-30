@@ -54,7 +54,7 @@ class AddAction
     /**
      * @param ServerRequestInterface $request
      * @param ResponseInterface $response
-     * @return HtmlResponse|RedirectResponse
+     * @return ResponseInterface
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response)
     {

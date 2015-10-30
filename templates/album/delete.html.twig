@@ -1,0 +1,15 @@
+{% extends '@layout/default.html.twig' %}
+
+{% block title %}Delete Album{% endblock %}
+
+{% block content %}
+    <h1>Delete Album</h1>
+
+    <form method="post">
+        <div>
+            <input type="hidden" name="id" value="{{ album.id }}" />
+            <input class="btn btn-danger" type="submit" name="del" value="Yes" />
+            <input class="btn btn-primary" type="submit" name="del" value="No" />
+        </div>
+    </form>
+{% endblock %}

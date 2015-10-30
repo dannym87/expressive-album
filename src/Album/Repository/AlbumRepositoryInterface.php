@@ -22,4 +22,10 @@ interface AlbumRepositoryInterface
      * @return bool
      */
     public function save(Album $album);
+
+    /**
+     * @param Album $album
+     * @return bool
+     */
+    public function delete(Album $album);
 }

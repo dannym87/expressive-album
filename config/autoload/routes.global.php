@@ -36,13 +36,13 @@ return [
             'name'            => 'album.edit',
             'path'            => '/album/edit/{id:\d+}',
             'middleware'      => App\Album\Action\EditAction::class,
-            'allowed_methods' => ['GET'],
+            'allowed_methods' => ['GET', 'POST'],
         ],
         [
             'name'            => 'album.delete',
             'path'            => '/album/delete/{id:\d+}',
             'middleware'      => App\Album\Action\DeleteAction::class,
-            'allowed_methods' => ['GET'],
+            'allowed_methods' => ['GET', 'POST'],
         ],
     ],
 ];

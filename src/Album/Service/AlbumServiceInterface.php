@@ -28,4 +28,12 @@ interface AlbumServiceInterface
      * @return bool
      */
     public function addAlbum(array $data);
+
+    /**
+     * Delete an album
+     *
+     * @param Album $album
+     * @return bool
+     */
+    public function deleteAlbum(Album $album);
 }

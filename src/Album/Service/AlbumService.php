@@ -68,4 +68,19 @@ class AlbumService implements AlbumServiceInterface
 
         return false;
     }
+
+    /**
+     * @param Album $album
+     * @return bool
+     */
+    public function deleteAlbum(Album $album)
+    {
+        if (!$this->repository->delete($album)) {
+            throw new \Exception(sprintf(
+                'Unable to delete album "%s (%s)"', $album->getTitle(), $album->getArtist()
+            ));
+        }
+
+        return true;
+    }
 }

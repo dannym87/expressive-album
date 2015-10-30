@@ -85,4 +85,15 @@ class AlbumRepository implements AlbumRepositoryInterface
             // @todo update
         }
     }
+
+    /**
+     * @param Album $album
+     * @return int
+     */
+    public function delete(Album $album)
+    {
+        return $this->db->delete('album', [
+            'id' => $album->getId(),
+        ]);
+    }
 }
