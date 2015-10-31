@@ -2,17 +2,19 @@
 
 namespace App\Session\Factory;
 
-use Aura\Session\SessionFactory;
+use App\Session\Middleware\Session;
+use Aura\Session\Session as AuraSession;
 use Interop\Container\ContainerInterface;
 
-class AuraSessionFactory
+class SessionMiddlewareFactory
 {
     /**
      * @param ContainerInterface $container
-     * @return \Aura\Session\Session
      */
     public function __invoke(ContainerInterface $container)
     {
-        return (new SessionFactory())->newInstance($_COOKIE);
+        $session = $container->get(AuraSession::class);
+
+        return new Session($session);
     }
 }

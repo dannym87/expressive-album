@@ -57,6 +57,10 @@ class EditAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response)
     {
         try {
+            /**
+             * @var Session $session
+             */
+            $session = $request->getAttribute('session');
             $id = $request->getAttribute('id');
             $album = $this->albumService->getAlbum($id);
 
@@ -66,10 +70,6 @@ class EditAction
             if ($request->getMethod() === 'POST') {
                 $this->albumService->updateAlbum($request->getParsedBody(), $id);
 
-                /**
-                 * @var Session $session
-                 */
-                $session = $request->getAttribute('session');
                 $session->getSegment('App\Album')->setFlash(
                     'flash',
                     [

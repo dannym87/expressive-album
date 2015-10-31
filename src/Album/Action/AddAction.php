@@ -61,18 +61,18 @@ class AddAction
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response)
     {
         try {
-            $this->form->get('submit')->setValue('Add');
+            /**
+             * @var Session $session
+             */
+            $session = $request->getAttribute('session');
 
             $album = new Album();
             $this->form->bind($album);
+            $this->form->get('submit')->setValue('Add');
 
             if ($request->getMethod() === 'POST') {
                 $this->albumService->addAlbum($request->getParsedBody());
 
-                /**
-                 * @var Session $session
-                 */
-                $session = $request->getAttribute('session');
                 $session->getSegment('App\Album')->setFlash(
                     'flash',
                     [

@@ -3,13 +3,12 @@
 return [
     'dependencies' => [
         'invokables' => [
-            App\Action\PingAction::class    => App\Action\PingAction::class,
-            // Album invokables
-            App\Album\Form\AlbumForm::class => App\Album\Form\AlbumForm::class,
+            App\Action\PingAction::class => App\Action\PingAction::class,
         ],
         'factories'  => [
             'db'                                                 => App\Db\Factory\DoctrineDbalConnectionFactory::class,
             Aura\Session\Session::class                          => App\Session\Factory\AuraSessionFactory::class,
+            App\Session\Middleware\Session::class                => App\Session\Factory\SessionMiddlewareFactory::class,
             Zend\Expressive\Application::class                   => Zend\Expressive\Container\ApplicationFactory::class,
             App\Action\HomePageAction::class                     => App\Action\HomePageFactory::class,
             // Album factories
@@ -19,6 +18,7 @@ return [
             App\Album\Action\DeleteAction::class                 => App\Album\Factory\DeleteActionFactory::class,
             App\Album\Repository\AlbumRepositoryInterface::class => App\Album\Factory\AlbumRepositoryFactory::class,
             App\Album\Service\AlbumServiceInterface::class       => App\Album\Factory\AlbumServiceFactory::class,
+            App\Album\Form\AlbumForm::class                      => App\Album\Factory\AlbumFormFactory::class,
         ],
     ],
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Album\Form;
 
+use Aura\Session\CsrfToken;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
 
@@ -9,11 +10,12 @@ class AlbumForm extends Form implements InputFilterProviderInterface
 {
     /**
      * @param string|null $name
+     * @param array|null $options
      */
-    public function __construct($name = null)
+    public function __construct($name = null, $options = [])
     {
         // we want to ignore the name passed
-        parent::__construct('album');
+        parent::__construct('album', $options);
 
         $this->add([
             'name' => 'id',
@@ -42,6 +44,14 @@ class AlbumForm extends Form implements InputFilterProviderInterface
             'attributes' => [
                 'value' => 'Go',
                 'id'    => 'submit-button',
+            ],
+        ]);
+
+        $this->add([
+            'name'       => '_csrf',
+            'type'       => 'hidden',
+            'attributes' => [
+                'value' => $this->getOption('csrf')->getValue(),
             ],
         ]);
     }
@@ -91,6 +101,28 @@ class AlbumForm extends Form implements InputFilterProviderInterface
                             'encoding' => 'UTF-8',
                             'min'      => 1,
                             'max'      => 100,
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'name'       => '_csrf',
+                'require'    => true,
+                'validators' => [
+                    [
+                        'name'     => 'callback',
+                        'options'  => [
+                            'callback'        => function ($value, $context, CsrfToken $csrf) {
+                                if ($csrf->isValid($value)) {
+                                    return true;
+                                }
+
+                                return false;
+                            },
+                            'callbackOptions' => [
+                                $this->getOption('csrf'),
+                            ],
+                            'message' => 'The form submitted did not originate from the expected site',
                         ],
                     ],
                 ],

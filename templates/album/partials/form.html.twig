@@ -16,6 +16,10 @@
            name="{{ form.get('id').name }}"
            value="{{ form.get('id').value }}"/>
 
+    <input type="{{ form.get('_csrf').attributes.type }}"
+           name="{{ form.get('_csrf').name }}"
+           value="{{ form.get('_csrf').value }}"/>
+
     <div class="form-group">
         <label for="{{ form.get('title').name }}">{{ form.get('title').label }}</label>
         <input class="form-control"

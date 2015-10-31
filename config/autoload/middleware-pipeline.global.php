@@ -14,7 +14,7 @@ return [
             //    'error' => true,
             //],
             [
-                'middleware' => Aura\Session\Session::class,
+                'middleware' => App\Session\Middleware\Session::class
             ]
         ],
 
