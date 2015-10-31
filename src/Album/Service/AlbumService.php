@@ -92,9 +92,7 @@ class AlbumService implements AlbumServiceInterface
         if ($this->form->isValid()) {
             $album = $this->form->getData();
 
-            if (!$this->repository->save($album, $id)) {
-                throw new \Exception('Unable to save album');
-            }
+            $this->repository->save($album, $id);
 
             return true;
         }

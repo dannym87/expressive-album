@@ -5,6 +5,7 @@ namespace App\Album\Action;
 use App\Album\Entity\Album;
 use App\Album\Form\AlbumForm;
 use App\Album\Service\AlbumServiceInterface;
+use Aura\Session\Session;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -62,12 +63,26 @@ class AddAction
         try {
             $this->form->get('submit')->setValue('Add');
 
-            $this->form->bind(new Album());
+            $album = new Album();
+            $this->form->bind($album);
 
             if ($request->getMethod() === 'POST') {
-                if ($this->albumService->addAlbum($request->getParsedBody())) {
-                    return new RedirectResponse($this->router->generateUri('album.index'));
-                }
+                $this->albumService->addAlbum($request->getParsedBody());
+
+                /**
+                 * @var Session $session
+                 */
+                $session = $request->getAttribute('session');
+                $session->getSegment('App\Album')->setFlash(
+                    'flash',
+                    [
+                        'type'    => 'success',
+                        'message' => sprintf('Successfully added album %s (%s)', $album->getTitle(),
+                            $album->getArtist()),
+                    ]
+                );
+
+                return new RedirectResponse($this->router->generateUri('album.index'));
             }
         } catch (\Exception $e) {
             // perhaps log an error and display a message to the user

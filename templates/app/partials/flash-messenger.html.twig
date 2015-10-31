@@ -1,0 +1,3 @@
+{% if flashMessage %}
+    <div class="alert alert-{{ flashMessage.type|default('info') }}">{{ flashMessage.message }}</div>
+{% endif %}

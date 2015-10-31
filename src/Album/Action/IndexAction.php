@@ -3,6 +3,7 @@
 namespace App\Album\Action;
 
 use App\Album\Service\AlbumServiceInterface;
+use Aura\Session\Session;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -40,8 +41,14 @@ class IndexAction
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response)
     {
+        /**
+         * @var Session $session
+         */
+        $session = $request->getAttribute('session');
+        $flashMessage = $session->getSegment('App\Album')->getFlash('flash');
+
         $albums = $this->albumService->listAlbums();
 
-        return new HtmlResponse($this->template->render('album::index', compact('albums')));
+        return new HtmlResponse($this->template->render('album::index', compact('albums', 'flashMessage')));
     }
 }

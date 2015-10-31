@@ -9,6 +9,7 @@ return [
         ],
         'factories'  => [
             'db'                                                 => App\Db\Factory\DoctrineDbalConnectionFactory::class,
+            Aura\Session\Session::class                          => App\Session\Factory\AuraSessionFactory::class,
             Zend\Expressive\Application::class                   => Zend\Expressive\Container\ApplicationFactory::class,
             App\Action\HomePageAction::class                     => App\Action\HomePageFactory::class,
             // Album factories

@@ -3,6 +3,7 @@
 namespace App\Album\Action;
 
 use App\Album\Service\AlbumServiceInterface;
+use Aura\Session\Session;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -59,6 +60,19 @@ class DeleteAction
 
                 if (strtolower($del) === 'yes') {
                     $this->albumService->deleteAlbum($album);
+
+                    /**
+                     * @var Session $session
+                     */
+                    $session = $request->getAttribute('session');
+                    $session->getSegment('App\Album')->setFlash(
+                        'flash',
+                        [
+                            'type'    => 'success',
+                            'message' => sprintf('Successfully deleted album %s (%s)', $album->getTitle(),
+                                $album->getArtist()),
+                        ]
+                    );
                 }
 
                 // Redirect to list of albums

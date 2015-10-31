@@ -4,6 +4,7 @@ namespace App\Album\Action;
 
 use App\Album\Form\AlbumForm;
 use App\Album\Service\AlbumServiceInterface;
+use Aura\Session\Session;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\HtmlResponse;
@@ -63,9 +64,22 @@ class EditAction
             $this->form->get('submit')->setAttribute('value', 'Edit');
 
             if ($request->getMethod() === 'POST') {
-                if ($this->albumService->updateAlbum($request->getParsedBody(), $id)) {
-                    return new RedirectResponse($this->router->generateUri('album.index'));
-                }
+                $this->albumService->updateAlbum($request->getParsedBody(), $id);
+
+                /**
+                 * @var Session $session
+                 */
+                $session = $request->getAttribute('session');
+                $session->getSegment('App\Album')->setFlash(
+                    'flash',
+                    [
+                        'type'    => 'success',
+                        'message' => sprintf('Successfully updated album %s (%s)', $album->getTitle(),
+                            $album->getArtist()),
+                    ]
+                );
+
+                return new RedirectResponse($this->router->generateUri('album.index'));
             }
         } catch (\Exception $e) {
             // perhaps log an error and display a message to the user

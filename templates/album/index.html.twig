@@ -5,6 +5,8 @@
 {% block content %}
     <h1>My Albums</h1>
 
+    {% include '@app/partials/flash-messenger.html.twig' %}
+
     <p>
         <a href="{{ path('album.add') }}">Add new album</a>
     </p>
