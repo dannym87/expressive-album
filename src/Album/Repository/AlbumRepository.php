@@ -4,7 +4,6 @@ namespace App\Album\Repository;
 
 use App\Album\Entity\Album;
 use Doctrine\DBAL\Connection;
-use Zend\Hydrator\ArraySerializable;
 
 class AlbumRepository implements AlbumRepositoryInterface
 {
@@ -38,11 +37,10 @@ class AlbumRepository implements AlbumRepositoryInterface
             return [];
         }
 
-        $hydrator = new ArraySerializable();
         $albums = [];
 
         foreach ($result as $album) {
-            array_push($albums, $hydrator->hydrate($album, new Album()));
+            array_push($albums, new Album($album));
         }
 
         return $albums;
@@ -68,7 +66,7 @@ class AlbumRepository implements AlbumRepositoryInterface
             throw new \Exception("Could not find row $id");
         }
 
-        return (new ArraySerializable())->hydrate($result, new Album());
+        return new Album($result);
     }
 
     /**

@@ -21,12 +21,11 @@ class Album implements ArraySerializableInterface
      */
     protected $title;
 
-    /**
-     * @return int
-     */
-    public function getId()
+    public function __construct(array $data = null)
     {
-        return $this->id;
+        if (null !== $data) {
+            $this->exchangeArray($data);
+        }
     }
 
     /**
@@ -49,6 +48,14 @@ class Album implements ArraySerializableInterface
             'artist' => $this->artist,
             'title'  => $this->title,
         ];
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
