@@ -30,6 +30,15 @@ interface AlbumServiceInterface
     public function addAlbum(array $data);
 
     /**
+     * Update an existing album
+     *
+     * @param array $data
+     * @param int $id
+     * @return bool
+     */
+    public function updateAlbum(array $data, $id);
+
+    /**
      * Delete an album
      *
      * @param Album $album

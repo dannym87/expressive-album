@@ -73,16 +73,19 @@ class AlbumRepository implements AlbumRepositoryInterface
 
     /**
      * @param Album $album
+     * @param int $id
      * @return int The number of affected rows
      */
-    public function save(Album $album)
+    public function save(Album $album, $id = null)
     {
         $data = $album->getArrayCopy();
 
-        if (null === $album->getId()) {
+        if (null === $id) {
             return $this->db->insert('album', $data);
         } else {
-            // @todo update
+            return $this->db->update('album', $data, [
+                'id' => $id,
+            ]);
         }
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Album\Action;
 
+use App\Album\Entity\Album;
 use App\Album\Form\AlbumForm;
 use App\Album\Service\AlbumServiceInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -61,10 +62,12 @@ class AddAction
         try {
             $this->form->get('submit')->setValue('Add');
 
-            if ($request->getMethod() === 'POST') {
-                $this->albumService->addAlbum($request->getParsedBody());
+            $this->form->bind(new Album());
 
-                return new RedirectResponse($this->router->generateUri('album.index'));
+            if ($request->getMethod() === 'POST') {
+                if ($this->albumService->addAlbum($request->getParsedBody())) {
+                    return new RedirectResponse($this->router->generateUri('album.index'));
+                }
             }
         } catch (\Exception $e) {
             // perhaps log an error and display a message to the user

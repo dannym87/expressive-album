@@ -52,21 +52,16 @@ class AlbumService implements AlbumServiceInterface
      */
     public function addAlbum(array $data)
     {
-        $this->form->setData($data);
+        return $this->save($data);
+    }
 
-        if ($this->form->isValid()) {
-            $hydrator = new ArraySerializable();
-            $album = $hydrator->hydrate($this->form->getData(), new Album());
-            $album->setId(null);
-
-            if (!$this->repository->save($album)) {
-                throw new \Exception('Unable to save album');
-            }
-
-            return true;
-        }
-
-        return false;
+    /**
+     * @param array $data
+     * @return bool
+     */
+    public function updateAlbum(array $data, $id)
+    {
+        return $this->save($data, $id);
     }
 
     /**
@@ -82,5 +77,28 @@ class AlbumService implements AlbumServiceInterface
         }
 
         return true;
+    }
+
+    /**
+     * @param array $data
+     * @param int $id
+     * @return bool
+     * @throws \Exception
+     */
+    protected function save(array $data, $id = null)
+    {
+        $this->form->setData($data);
+
+        if ($this->form->isValid()) {
+            $album = $this->form->getData();
+
+            if (!$this->repository->save($album, $id)) {
+                throw new \Exception('Unable to save album');
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }

@@ -19,9 +19,10 @@ interface AlbumRepositoryInterface
 
     /**
      * @param Album $album
+     * @param int $id
      * @return bool
      */
-    public function save(Album $album);
+    public function save(Album $album, $id = null);
 
     /**
      * @param Album $album
