@@ -19,7 +19,8 @@
         "zendframework/zend-expressive-twigrenderer": "^0.2",
         "doctrine/dbal": "^2.5",
         "zendframework/zend-form": "^2.6",
-        "aura/session": "^2.0"
+        "aura/session": "^2.0",
+        "damess/expressive-session-middleware": "^1.0"
     },
     "require-dev": {
         "composer/composer": ">=1.0.0-alpha10",

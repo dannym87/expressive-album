@@ -14,7 +14,7 @@ return [
             //    'error' => true,
             //],
             [
-                'middleware' => App\Session\Middleware\Session::class
+                'middleware' => DaMess\Http\SessionMiddleware::class,
             ]
         ],
 

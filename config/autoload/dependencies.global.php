@@ -7,8 +7,8 @@ return [
         ],
         'factories'  => [
             'db'                                                 => App\Db\Factory\DoctrineDbalConnectionFactory::class,
-            Aura\Session\Session::class                          => App\Session\Factory\AuraSessionFactory::class,
-            App\Session\Middleware\Session::class                => App\Session\Factory\SessionMiddlewareFactory::class,
+            DaMess\Http\SessionMiddleware::class                 => DaMess\Factory\SessionMiddlewareFactory::class,
+            Aura\Session\Session::class                          => DaMess\Factory\AuraSessionFactory::class,
             Zend\Expressive\Application::class                   => Zend\Expressive\Container\ApplicationFactory::class,
             App\Action\HomePageAction::class                     => App\Action\HomePageFactory::class,
             // Album factories
