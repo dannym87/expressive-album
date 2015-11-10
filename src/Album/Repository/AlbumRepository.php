@@ -25,22 +25,17 @@ class AlbumRepository implements AlbumRepositoryInterface
      */
     public function fetchAll()
     {
-        $qb = $this->db->createQueryBuilder();
+        $albums = [];
 
-        $qb
-            ->select('*')
-            ->from('album', 'a');
+        $qb = $this->db->createQueryBuilder();
+        $qb->select('*')->from('album', 'a');
 
         $result = $qb->execute()->fetchAll();
 
-        if (empty($result)) {
-            return [];
-        }
-
-        $albums = [];
-
-        foreach ($result as $album) {
-            array_push($albums, new Album($album));
+        if (!empty($result)) {
+            foreach ($result as $album) {
+                array_push($albums, new Album($album));
+            }
         }
 
         return $albums;
